@@ -16,7 +16,6 @@ export default function App() {
 			return response.data;
 		},
 	});
-	// console.log(data);
 
 	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error.message}</div>;
@@ -25,7 +24,7 @@ export default function App() {
 		<>
 			<Routes>
 				<Route path='/' element={<Signin />} />
-				<Route path='/dashboard' element={<Dashboard />} />
+				<Route path='/dashboard' element={<Dashboard data={data} />} />
 			</Routes>
 		</>
 	);
