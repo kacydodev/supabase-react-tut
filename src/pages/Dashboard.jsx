@@ -2,12 +2,14 @@ import { AgCharts } from 'ag-charts-react';
 import { includeKeys } from 'filter-obj';
 import useSupabaseBrowser from '../utils/supabase-browser';
 import { useEffect } from 'react';
+import Form from '../components/Form';
 
 export default function Dashboard({ data }) {
+	// console.log('data:', data);
+	const supabase = useSupabaseBrowser();
+
 	const chartData = data?.map((item) => includeKeys(item, ['name', 'value']));
 	const chartSeries = [{ type: 'bar', xKey: 'name', yKey: 'value' }];
-
-	const supabase = useSupabaseBrowser();
 
 	// TODO: Look up supabase subscribe
 	useEffect(() => {
@@ -28,6 +30,7 @@ export default function Dashboard({ data }) {
 	return (
 		<>
 			<AgCharts options={{ data: chartData, series: chartSeries }} />
+			<Form data={data} />
 		</>
 	);
 }
