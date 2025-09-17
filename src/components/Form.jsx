@@ -1,10 +1,19 @@
 import { useForm } from 'react-hook-form';
+import useSupabaseBrowser from '../utils/supabase-browser';
 
 export default function Form({ data }) {
-	const names = data.map((person) => person.name);
-	const { register, handleSubmit, watch } = useForm();
+	const supabase = useSupabaseBrowser();
 
-	const onSubmit = (formData) => console.log(formData);
+	const names = data.map((person) => person.name);
+
+	const { register, handleSubmit } = useForm();
+
+	const onSubmit = async ({ name, inputAmount }) => {
+		await supabase
+			.from('sale-deals')
+			.update({ value: inputAmount })
+			.eq('name', name);
+	};
 
 	return (
 		// TODO: Error state
@@ -30,7 +39,7 @@ export default function Form({ data }) {
 				<input
 					type='number'
 					className='input'
-					{...register('amount', { required: true })}
+					{...register('inputAmount', { required: true })}
 				/>
 			</label>
 
