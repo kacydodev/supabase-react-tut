@@ -9,13 +9,19 @@ export default function App() {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['sale-deals'], // Unique identifier for this query
 		queryFn: async () => {
-			const response = await supabase.from('sale-deals').select();
+			const response = await supabase.from('sale-deals').select(
+				`
+					name,
+					value
+					`
+			);
 			if (response.error) {
 				throw new Error('Network response was not ok');
 			}
 			return response.data;
 		},
 	});
+	// console.log(data);
 
 	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error.message}</div>;
@@ -25,6 +31,7 @@ export default function App() {
 			<Routes>
 				<Route path='/' element={<Signin />} />
 				<Route path='/dashboard' element={<Dashboard data={data} />} />
+				{/* <Route path='/dashboard' element={<>whatever</>} /> */}
 			</Routes>
 		</>
 	);
