@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Routes, Route } from 'react-router';
-import useSupabaseBrowser from './utils/supabase-browser';
+import useSupabaseBrowser from './utils/supabase';
 import Dashboard from './pages/Dashboard';
 import Signin from './pages/Signin';
 
