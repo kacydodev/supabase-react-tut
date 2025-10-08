@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import useSupabaseBrowser from '../utils/supabase-browser';
+import useSupabaseBrowser from '../utils/supabase';
 
 export default function Form({ data }) {
 	const supabase = useSupabaseBrowser();
